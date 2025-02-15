@@ -1,0 +1,104 @@
+# Flutter related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.packages
+build/
+.pub-cache/
+.pub/
+/ios/Flutter/Flutter.framework/
+/ios/Flutter/App.framework/
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral/
+/ios/Flutter/Flutter.podspec.lock
+/ios/Flutter/.last_build_id
+/windows/flutter/generated_plugin_registrant.h
+/windows/flutter/generated_plugin_registrant.cc
+/macos/Flutter/ephemeral/
+/web/.dart_tool/
+.macOs/.dart_tool/
+.flutter_tools/
+.flutter/
+.packages
+
+# Fuchsia
+.fuchsia
+
+# Coverage
+coverage/
+.dart_tool
+*.log
+*.lock
+*.log.*.lock
+.lock.*.log
+.lock
+.lockfile
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.sublime-workspace
+.vscode/
+
+# JetBrains related
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/shelf
+.idea/gradle.xml
+.idea/encodings.xml
+.idea/compiler.xml
+.idea/codeStyleSettings.xml
+
+# Android related
+/.gradle/
+/android/local.properties
+/android/key.properties
+.android/app/release/
+/android/app/debug/
+/android/app/profile/
+/android/app/outputs/
+
+# iOS related
+.generated/
+/ios/.symlinks/
+/ios/ServiceDefinitions.json
+/ios/Podfile.lock
+/ios/Pods/
+/ios/Runner/GeneratedPluginRegistrant.*
+
+# VS Code related
+.vscode/
+
+# macOS related
+.symlinks/
+.generated/
+/macos/Flutter/GeneratedPluginRegistrant.*
+
+# Windows related
+/windows/flutter/generated_plugin_registrant.cc
+/windows/flutter/generated_plugin_registrant.h
+
+# Linux related
+/linux/flutter/generated_plugin_registrant.cc
+/linux/flutter/generated_plugin_registrant.h
+/linux/flutter/CMakeLists.txt
+/linux/flutter/shell/platform/linux/
+
+
+devtools_options.yaml
+.metadata
