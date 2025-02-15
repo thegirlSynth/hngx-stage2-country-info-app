@@ -3,7 +3,7 @@ import 'package:hng_countries/services/fetch_countries.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:hng_countries/theme/theme_provider.dart';
-import 'package:hng_countries/filter_modal.dart';
+import 'package:hng_countries/widgets/filter_modal.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
