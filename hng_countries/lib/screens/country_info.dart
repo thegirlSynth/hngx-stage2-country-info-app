@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../theme/theme_provider.dart';
@@ -62,7 +63,7 @@ class CountryInfo extends StatelessWidget {
             const SizedBox(height: 16.0),
 
             // Country details from API
-            _buildDetailItem("Population", country['population'].toString(), context),
+            _buildDetailItem("Population", NumberFormat.decimalPattern().format(country['population']), context),
             _buildDetailItem("Region", country['region'], context),
             _buildDetailItem("Capital", country['capital']?[0] ?? 'N/A', context),
             _buildDetailItem("Official Name", country['name']['official'], context),
