@@ -13,6 +13,26 @@ A Flutter application that provides detailed information about countries, includ
 - **State Management:** Provider (if needed)
 - **Networking:** HTTP package for API calls
 
+## 📸 Screenshots
+
+| Home Screen(Light and Dark modes) |
+| ----------- |
+<table>
+  <tr>
+    <td><img src="hng_countries/assets/img/homescreen_light.png" width="200"></td>
+    <td><img src="hng_countries/assets/img/homescreen_dark.png" width="200"></td>
+  </tr>
+</table>
+
+| Country Details(Light and Dark modes) |
+| ----------- |
+<table>
+  <tr>
+    <td><img src="hng_countries/assets/img/details_light.png" width="200"></td>
+    <td><img src="hng_countries/assets/img/details_dark.png" width="200"></td>
+  </tr>
+</table>
+
 ## 🚀 Getting Started
 ### Prerequisites
 Make sure you have:
