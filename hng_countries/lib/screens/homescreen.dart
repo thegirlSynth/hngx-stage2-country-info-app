@@ -68,7 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
               continents.any((c) => _selectedContinents.contains(c));
 
           bool timezoneMatch = _selectedTimeZones.isEmpty ||
-              timezones.any((tz) => _selectedTimeZones.contains(tz));
+              timezones.any((tz) {
+                // Convert API timezone format (e.g., "UTC+01:00") to match filter modal format (e.g., "GMT+1:00")
+                String normalizedTz = tz
+                    .replaceAll("UTC", "GMT")
+                    .replaceAllMapped(RegExp(r'\+0(\d)'), (match) => "+${match[1]}")
+                    .replaceAllMapped(RegExp(r'-0(\d)'), (match) => "-${match[1]}");
+                return _selectedTimeZones.contains(normalizedTz);
+              });
 
           return continentMatch && timezoneMatch;
         }).toList();
