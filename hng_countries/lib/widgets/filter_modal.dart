@@ -37,7 +37,8 @@ class _FilterModalState extends State<FilterModal> {
   ];
   late Set<String> selectedContinents;
   late Set<String> selectedTimeZones;
-  bool isExpanded = false;
+  bool isContinentExpanded = false;
+  bool isTimeZoneExpanded = false;
 
   @override
   void initState() {
@@ -46,29 +47,24 @@ class _FilterModalState extends State<FilterModal> {
     selectedTimeZones = Set.from(widget.selectedTimeZones);
   }
 
-  void toggleExpanded(bool value) {
-    setState(() {
-      isExpanded = value;
-    });
-  }
+  bool get isAnyExpanded => isContinentExpanded || isTimeZoneExpanded;
 
   void _onSelectionChanged() {
     widget.onFilterApplied(selectedContinents, selectedTimeZones);
   }
-
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final backgroundColor = themeProvider.isDarkMode ? Colors.black : Colors.white;
     final textColor = themeProvider.isDarkMode ? Colors.white : Colors.black;
-    double maxHeight = MediaQuery.of(context).size.height * 0.7;
-    double modalHeight = isExpanded ? maxHeight : MediaQuery.of(context).size.height * 0.5;
+
+    double modalHeight = isAnyExpanded ? MediaQuery.of(context).size.height * 0.7 : 200;
 
     return Container(
       color: backgroundColor,
       child: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 16.0, right: 16.0),
+        padding: EdgeInsets.only(bottom: 50, left: 16.0, right: 16.0),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -99,8 +95,12 @@ class _FilterModalState extends State<FilterModal> {
                       children: [
                         // Continent Filters
                         ExpansionTile(
-                          title: Text("Continent", style: TextStyle(fontWeight: FontWeight.bold)),
-                          onExpansionChanged: toggleExpanded,
+                          title: Text("Continent", style: TextStyle(fontWeight: FontWeight.w500)),
+                          onExpansionChanged: (value) {
+                            setState(() {
+                              isContinentExpanded = value;
+                            });
+                          },
                           children: continents.map((continent) {
                             return CheckboxListTile(
                               activeColor: textColor,
@@ -123,8 +123,12 @@ class _FilterModalState extends State<FilterModal> {
 
                         // Time Zone Filters
                         ExpansionTile(
-                          title: Text("TimeZone", style: TextStyle(fontWeight: FontWeight.bold)),
-                          onExpansionChanged: toggleExpanded,
+                          title: Text("Time Zone", style: TextStyle(fontWeight: FontWeight.w500)),
+                          onExpansionChanged: (value) {
+                            setState(() {
+                              isTimeZoneExpanded = value;
+                            });
+                          },
                           children: allTimeZones.map((timezone) {
                             return CheckboxListTile(
                               title: Text(timezone),
@@ -146,50 +150,54 @@ class _FilterModalState extends State<FilterModal> {
                   ),
                 ),
 
-                // Action Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Reset Button
-                    Expanded(
-                      flex: 1,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedContinents.clear();
-                            selectedTimeZones.clear();
-                          });
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: textColor),
-                          foregroundColor: textColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8), // Rounded corners
+                // Action Buttons (only show when a dropdown is expanded)
+                if (isAnyExpanded)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Reset Button
+                      Expanded(
+                        flex: 1,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            setState(() {
+                              selectedContinents.clear();
+                              selectedTimeZones.clear();
+                            });
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: textColor),
+                            foregroundColor: textColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
                           ),
+                          child: Text("Reset"),
                         ),
-                        child: Text("Reset"),
                       ),
-                    ),
-                    SizedBox(width: 35),
-                    // Show Results Button
-                    Expanded(
-                      flex: 2,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          widget.onFilterApplied(selectedContinents, selectedTimeZones);
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFFF6C00),
-                          foregroundColor: Colors.white, // White text
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8), // Rounded corners
+                      SizedBox(width: 35),
+                      // Show Results Button
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            widget.onFilterApplied(selectedContinents, selectedTimeZones);
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFFFF6C00),
+                            foregroundColor: Colors.white, // White text
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.zero,
+                            ),
                           ),
+                          child: Text("Show results"),
                         ),
-                        child: Text("Show results"),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
