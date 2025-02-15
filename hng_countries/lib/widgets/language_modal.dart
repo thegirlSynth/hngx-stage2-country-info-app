@@ -13,6 +13,7 @@ class LanguageModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final backgroundColor = themeProvider.isDarkMode ? Colors.black : Colors.white;
+    final fillColor = themeProvider.isDarkMode ? Colors.white : Colors.black;
     final List<Map<String, dynamic>> languages = [
       {'locale': const Locale('id'), 'name': 'Bahasa'},       // Indonesian
       {'locale': const Locale('de'), 'name': 'Deutsch'},      // German
@@ -65,6 +66,7 @@ class LanguageModal extends StatelessWidget {
                     title: Text(language['name']),
                     trailing: Radio<Locale>(
                       value: language['locale'],
+                      activeColor: fillColor,
                       groupValue: Localizations.localeOf(context),
                       onChanged: (Locale? value) {
                         if (value != null) {
