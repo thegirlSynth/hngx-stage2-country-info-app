@@ -9,10 +9,14 @@ class CountryInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final country = ModalRoute.of(context)!.settings.arguments as Map;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    Color backgroundColor = themeProvider.isDarkMode ? Colors.black : Colors.white;
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text(country['name']['common'], style: const TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: backgroundColor,
+        title: Text(country['name']['common'], style: const TextStyle(fontWeight: FontWeight.w700)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -122,8 +126,8 @@ class CountryInfo extends StatelessWidget {
         text: TextSpan(
           style: TextStyle(fontSize: 16, color: textColor),
           children: [
-            TextSpan(text: "$title: ", style: const TextStyle(fontWeight: FontWeight.bold)),
-            TextSpan(text: value),
+            TextSpan(text: "$title: ", style: const TextStyle(fontWeight: FontWeight.w500)),
+            TextSpan(text: value, style: const TextStyle(fontWeight: FontWeight.w300)),
           ],
         ),
       ),
